@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apoorva R — DevOps Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f9f8f6;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.09);
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-muted: #999;
+    --accent: #1a6ef5;
+    --accent-light: #e8f0fe;
+    --font: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(249,248,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* LAYOUT */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2.5rem; }
+  section { padding: 5rem 0; }
+  hr.divider { border: none; border-top: 1px solid var(--border); }
+
+  /* HERO */
+  #hero {
+    padding: 6rem 0 5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.5px;
+  }
+  .hero-name {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+  .hero-name strong { font-weight: 500; }
+  .hero-role {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+  .hero-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--text-primary);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: var(--font);
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.78; }
+  .btn-outline {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: var(--font);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-outline:hover { background: #efefed; }
+  .hero-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #fff;
+    letter-spacing: -1px;
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+
+  /* SECTION HEADER */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.7px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+  }
+  .skill-category {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: var(--mono);
+  }
+
+  /* EXPERIENCE */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .exp-meta { text-align: right; padding-top: 3px; }
+  .exp-date {
+    font-size: 12px;
+    font-family: var(--mono);
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .exp-company {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  .exp-role {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+  }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    padding: 3px 0 3px 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+    font-size: 11px;
+    top: 6px;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.4rem;
+    transition: border-color 0.2s;
+  }
+  .project-card:hover { border-color: rgba(26,110,245,0.3); }
+  .project-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .project-tools { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tool-tag {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .contact-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: rgba(26,110,245,0.35); }
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+  .contact-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    margin-bottom: 2px;
+  }
+  .contact-value { font-size: 13px; font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2.5rem;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    border-top: 1px solid var(--border);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 620px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1.2rem; }
+    .container { padding: 0 1.25rem; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-avatar { display: none; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-meta { text-align: left; }
+    .projects-grid, .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">AR/</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <div id="hero">
+    <div>
+      <span class="hero-tag">DevOps Engineer · AWS · Kubernetes · Terraform</span>
+      <h1 class="hero-name">Hi, I'm <strong>Apoorva R.</strong></h1>
+      <p class="hero-role">Cloud &amp; DevOps Engineer based in Mysore, India</p>
+      <p class="hero-desc">
+        DevOps Engineer with 1.5 years of hands-on experience in designing and automating CI/CD pipelines, containerized deployments, and 
+cloud infrastructure on AWS. Skilled in Jenkins, Docker, Kubernetes, and Terraform, with a focus on building scalable, reliable, and 
+automated deployment systems.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#contact">Get in touch</a>
+        
+      </div>
+    </div>
+    <div class="hero-avatar">AR</div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- SKILLS -->
+<div class="container">
+  <section id="skills">
+    <div class="section-label">What I work with</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-category">Cloud Platform</div>
+        <div class="skill-tags">
+          <span class="tag">AWS</span>
+          <span class="tag">EC2</span>
+          <span class="tag">S3</span>
+          <span class="tag">VPC</span>
+          <span class="tag">Route53</span>
+          <span class="tag">IAM</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">CI/CD</div>
+        <div class="skill-tags">
+          <span class="tag">Jenkins</span>
+          <span class="tag">ArgoCD</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Containers</div>
+        <div class="skill-tags">
+          <span class="tag">Docker</span>
+          <span class="tag">Kubernetes</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Infrastructure as Code</div>
+        <div class="skill-tags">
+          <span class="tag">Terraform</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Networking</div>
+        <div class="skill-tags">
+          <span class="tag">Subnets</span>
+          <span class="tag">Security Groups</span>
+          <span class="tag">Load Balancer</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Version Control</div>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<hr class="divider" />
+
+<!-- EXPERIENCE -->
+<div class="container">
+  <section id="experience">
+    <div class="section-label">Where I've worked</div>
+    <h2 class="section-title">Experience</h2>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Dec 2025 –<br>Present</div>
+        <div class="exp-company">MicroDegree</div>
+      </div>
+      <div>
+        <div class="exp-role">Cloud Intern</div>
+        <ul class="exp-bullets">
+          <li>Managed cloud infrastructure to ensure high availability and reliable application performance</li>
+          <li>Automated infrastructure provisioning using Terraform, reducing setup time by ~70%</li>
+          <li>Built CI/CD pipelines using Jenkins, cutting deployment time by ~30% and reducing manual errors</li>
+          <li>Delivered hands-on sessions on AWS, Docker, Kubernetes, and CI/CD to 50+ learners</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Jan 2022 –<br>Jan 2023</div>
+        <div class="exp-company">LTIMindtree</div>
+      </div>
+      <div>
+        <div class="exp-role">DevOps Engineer</div>
+        <ul class="exp-bullets">
+          <li>Provisioned and managed AWS resources (EC2, S3, IAM, VPC) for scalable deployments</li>
+          <li>Automated CI/CD workflows, reducing manual intervention by ~30–40% and accelerating release cycles</li>
+          <li>Containerized applications with Docker and deployed on Kubernetes, reducing environment inconsistencies by ~30–40%</li>
+          <li>Implemented Terraform-based IaC, reducing infrastructure provisioning time by ~60–70%</li>
+          <li>Monitored deployments and cut issue resolution time by ~20–30%, improving stability</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<hr class="divider" />
+
+<!-- PROJECTS -->
+<div class="container">
+  <section id="projects">
+    <div class="section-label">Things I've built</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-title">Cloud Infrastructure Automation on AWS</div>
+        <div class="project-desc">
+          Built and automated modular AWS infrastructure using Terraform for consistent, repeatable deployments.
+          Used S3 backend and Git-based version control for secure state management.
+        </div>
+        <div class="project-tools">
+          <span class="tool-tag">Terraform</span>
+          <span class="tool-tag">AWS</span>
+          <span class="tool-tag">Git</span>
+          <span class="tool-tag">AWS CLI</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-title">End-to-End CI/CD Pipeline with ArgoCD &amp; Kubernetes</div>
+        <div class="project-desc">
+          Designed a full CI/CD pipeline using Jenkins and GitHub, deploying to Kubernetes via ArgoCD (GitOps).
+          Integrated Maven, Docker, and Nexus for build, containerization, and artifact management.
+        </div>
+        <div class="project-tools">
+          <span class="tool-tag">Jenkins</span>
+          <span class="tool-tag">Docker</span>
+          <span class="tool-tag">Kubernetes</span>
+          <span class="tool-tag">ArgoCD</span>
+          <span class="tool-tag">Nexus</span>
+          <span class="tool-tag">Maven</span>
+          <span class="tool-tag">GitHub</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<hr class="divider" />
+
+<!-- CONTACT -->
+<div class="container">
+  <section id="contact">
+    <div class="section-label">Let's connect</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+
+      <a class="contact-item" href="mailto:apoorvaappu8892@gmail.com">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">apoorvaappu8892@gmail.com</div>
+        </div>
+      </a>
+
+      <a class="contact-item" href="tel:+919916353418">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.128.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.72 6.72l.91-.91a2 2 0 0 1 2.11-.45c.907.34 1.85.572 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+91 99163 53418</div>
+        </div>
+      </a>
+
+      <!-- UPDATE: Replace # with your actual LinkedIn URL -->
+      <a class="contact-item" href="https://linkedin.com/in/apoorvaramesh11" target="_blank">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">Apoorva R</div>
+        </div>
+      </a>
+
+      <!-- UPDATE: Replace # with your actual GitHub URL -->
+      <a class="contact-item" href="https://github.com/apoorvaramesh11" target="_blank">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">Apoorva R</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+<footer>
+  © 2026 Apoorva R · Mysore, India
+</footer>
+
+</body>
+</html>
